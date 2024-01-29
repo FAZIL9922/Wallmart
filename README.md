@@ -38,20 +38,17 @@ Sorting the data frame with respect to weekly sales in Descending order and plot
 We can see that Store number 20 has the highest weekly sales (20508.301592)
 Sorting the data frame with respect to weekly sales in Ascending order and plotting a var graph on the data frame itself to get a idea about the data.
 We can see that Store number 5 has the least weekly sales (5053.415813)
-7) Bar graph fpr mean weekly sales for each store.
+7) Bar graph for mean weekly sales for each store.
 Plotting a bar graph with store number as x values and mean weekly sales for that store as the y values.
 Grouping the train_df by Department and computing the mean of weekly_sales for each Department.
 8) Bar chart on Data Frame.
 Sorting the data frame with respect to weekly sales in Descending order and plotting a var graph on the data frame itself to get a idea about the data.
 We can see that Department number 92 has the largest weekly sales.
 Sorting the data frame with respect to weekly sales in Ascending order and plotting a var graph on the data frame itself to get a idea about the data.
-We can see that department 47 has a cumulative negative value for weekly sales followed by department 43 which has a very low weekly sale of 1.193333
-
-9)Bar graph fpr mean weekly sales for each Department.
+We can see that department 47 has a cumulative negative value for weekly sales followed by department 43 which has a very low weekly sale of 1.193333.
+9) Bar graph fpr mean weekly sales for each Department.
 Plotting a bar graph with Department number as x values and mean weekly sales for that store as the y values.
 10) Series of line plots for mean sales with respect to Departments.
 Creating line plots of mean weekly sales for each department in the dataframe.
-11) Histogram / Normal Distribution
-Plotting the normal distribution where sales is greater than zero.
-12) Heatmap
-Plotting a heatmap to determine the correlation between columns in the data frame.
+11) Histogram / Normal Distribution -Plotting the normal distribution where sales is greater than zero.
+12) Heatmap - Plotting a heatmap to determine the correlation between columns in the data frame.
