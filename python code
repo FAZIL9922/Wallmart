@@ -1,0 +1,531 @@
+# Walmart
+
+# --------------------------------------------------------------------------------------------------------
+
+#### Walmart Inc. is an American multinational retail corporation that operates a chain of hypermarkets, discount department stores, and grocery stores from the United States, headquartered in Bentonville, Arkansas.
+
+# --------------------------------------------------------------------------------------------------------
+
+##### Task is to analyze  the sales of  walmart with the data given. (eg: anaglysing weekly sales, which store or department sells most etc.)
+
+## DATA ANALYSIS AND VIUALIZATION
+
+#### Importing all the required libraries and packages.
+
+import pandas as pd
+import numpy as np
+from matplotlib import pyplot as plt
+from matplotlib.gridspec import GridSpec
+import seaborn as sns
+
+#### Reading all the csv files as dataframes using pd.read_csv method.
+
+train_df = pd.read_csv('train.csv')
+test_df = pd.read_csv('test.csv')
+features_df=pd.read_csv('features.csv')
+stores_df = pd.read_csv('stores.csv')
+
+
+#### Aanalyzing Each imported data frames.
+
+#### Viewing the data in train_df
+
+###### We can see that the dataframe has weekly  sales data in accordance with store department and date.
+
+train_df.head()
+
+train_df.info()
+
+###### Describe the data in train_df, that is mean count etc of the numerical columns in the data frame.
+
+train_df.describe()
+
+###### This shows how many null values each column in the data frame has, we can see that there are no null values in any columns of the data frame.
+
+train_df.isnull().sum()
+
+###### Viewing the test_df
+
+test_df.head()
+
+test_df.columns
+
+###### Describing the data in the test dataframe.
+
+test_df.describe()
+
+##### Analysing null values in each column.
+
+test_df.isnull().sum()
+
+##### Viewing the features dataframe.
+
+features_df.head()
+
+##### Viewing the Info of each column in the features dataframe.
+
+features_df.info()
+
+
+features_df.describe()
+
+##### Finding out about the null values in each column.
+
+features_df.isnull().sum()
+
+##### Viewing the stores data frame.
+
+stores_df.head()
+
+stores_df.describe()
+
+##### Finding the null values in each column.
+
+stores_df.isnull().sum()
+
+##### Create a new data frame by merging (inner) features data frame to stores data frame  on Store for analysis purpose.
+
+dataset_m = features_df.merge(stores_df, how= 'inner', on = 'Store')
+dataset_m.head()
+
+##### Gathering info regarding the columns of the new data frame.
+
+dataset_m.info()
+
+##### Convering date to date time object.
+
+from datetime import datetime
+#converting date to date time object
+dataset_m['Date'] = pd.to_datetime(dataset_m['Date'])
+train_df['Date'] = pd.to_datetime(train_df['Date'])
+test_df['Date'] = pd.to_datetime(test_df['Date'])
+#Extract week and year from the date and make them into new columns.
+dataset_m['week'] = dataset_m.Date.dt.isocalendar().week
+dataset_m['year'] = dataset_m.Date.dt.isocalendar().year
+
+dataset_m.tail()
+
+##### Creating a new df by merging (inner) the train_df and the new data frame dataset_m on  store, date and IsHoliday columns and sorting the values by Store, department and date.
+
+train_df_1 = train_df.merge(dataset_m, how='inner', on=['Store', 'Date', 'IsHoliday']).sort_values(by=['Store','Dept','Date']).reset_index(drop=True)
+
+train_df_1.head()
+
+# --------------------------------------------------------------------------------------------------------
+
+# VISUALIZATIONS
+
+# -------------------------
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#### Defining a function scatter to plot the scatter plot with the data of the column specified as the function parameter in x axis and weekly sales as the y values.
+
+### 1) scatter plot
+
+def scatter(train_df_1, column):
+    #plot the figure
+    plt.figure()
+    #plot the scatter plot with data from the specified column in x axis and weekly sales in y axis
+    plt.scatter(train_df[column], train_df['Weekly_Sales'])
+    #give y label as weekly_sales
+    plt.ylabel('Weekly_Sales')
+    #Give the xlabel as the column specified as parameter in the function
+    plt.xlabel(column)
+
+#plot a scatter plot using the scatter function a scatter plot of weekly sales with respect to Store
+scatter(train_df_1, 'Store')
+#plot a scatter plot using the scatter function a scatter plot of weekly sales with respect to Department
+scatter(train_df_1, 'Dept')
+
+We can see scatter plots of weekly sales with respect to stores and department, we can see that departments between 60 and 80 are performing better.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+### 2) 3 line plots for weekly sales for eact year
+
+This is the line plot for weekly sales in the year 2010
+
+
+
+# Assuming train_df_1 is a DataFrame with the necessary columns including 'Week', 'Weekly_Sales', and 'year'
+
+# Convert 'Weekly_Sales' column to numeric
+train_df_1['Weekly_Sales'] = pd.to_numeric(train_df_1['Weekly_Sales'], errors='coerce')
+
+# Filtering out mean weekly sales for the year 2010
+weekly_sales_2010 = train_df_1[train_df_1['year'] == 2010].groupby('week')['Weekly_Sales'].mean().dropna()
+
+# Plot a line plot with week on the x-axis and sales for that particular week of the filtered year on the y-axis
+plt.figure(figsize=(20, 10))
+plt.plot(weekly_sales_2010.index, weekly_sales_2010.values, color='red')
+plt.grid()
+
+# Plot labels and title
+plt.xticks(np.arange(1, 53, step=1))
+plt.xlabel('Week', fontsize=14)
+plt.ylabel('Sales', fontsize=14)
+plt.title('Mean Weekly Sales for the Year 2010', fontsize=16)
+
+
+plt.show()
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+This is the line plot for weekly sales in the year 2011
+
+
+
+# Assuming train_df_1 is a DataFrame with the necessary columns including 'Week', 'Weekly_Sales', and 'year'
+
+# Convert 'Weekly_Sales' column to numeric
+train_df_1['Weekly_Sales'] = pd.to_numeric(train_df_1['Weekly_Sales'], errors='coerce')
+
+# Filtering out mean weekly sales for the year 2011
+weekly_sales_2011 = train_df_1[train_df_1['year'] == 2011].groupby('week')['Weekly_Sales'].mean().dropna()
+
+# Plot a line plot with week on the x-axis and sales for that particular week of the filtered year on the y-axis
+plt.figure(figsize=(20, 10))
+plt.plot(weekly_sales_2011.index, weekly_sales_2011.values, color='red')
+plt.grid()
+
+# Plot labels and title
+plt.xticks(np.arange(1, 53, step=1))
+plt.xlabel('Week', fontsize=14)
+plt.ylabel('Sales', fontsize=14)
+plt.title('Mean Weekly Sales for the Year 2011', fontsize=16)
+
+plt.show()
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+This is the line plot for weekly sales in the year 2012
+
+
+
+# Assuming train_df_1 is a DataFrame with the necessary columns including 'Week', 'Weekly_Sales', and 'year'
+
+# Convert 'Weekly_Sales' column to numeric
+train_df_1['Weekly_Sales'] = pd.to_numeric(train_df_1['Weekly_Sales'], errors='coerce')
+
+# Filtering out mean weekly sales for the year 2012
+weekly_sales_2012 = train_df_1[train_df_1['year'] == 2012].groupby('week')['Weekly_Sales'].mean().dropna()
+
+# Plot a line plot with week on the x-axis and sales for that particular week of the filtered year on the y-axis
+plt.figure(figsize=(20, 10))
+plt.plot(weekly_sales_2012.index, weekly_sales_2012.values, color='red')
+plt.grid()
+
+# Plot labels and title
+
+plt.xticks(np.arange(1, 53, step=1))
+plt.xlabel('Week', fontsize=14)
+plt.ylabel('Sales', fontsize=14)
+plt.title('Mean Weekly Sales for the Year 2012', fontsize=16)
+
+plt.show()
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+### 3) Combined line plots for each year (2010,2011,2012)
+
+#### Plotting the weekly sales for years 2010,2011,2012 on a single plot to compare the sales values with respect to week on each of these specified year for comparing the weekly sales in each year.
+
+
+
+# Assuming weekly_sales_2010, weekly_sales_2011, and weekly_sales_2012 are pandas Series or DataFrames
+
+# Convert to numeric and drop NaN values
+weekly_sales_2010 = pd.to_numeric(weekly_sales_2010, errors='coerce').dropna()
+weekly_sales_2011 = pd.to_numeric(weekly_sales_2011, errors='coerce').dropna()
+weekly_sales_2012 = pd.to_numeric(weekly_sales_2012, errors='coerce').dropna()
+
+plt.figure(figsize=(20, 10))
+
+# Plotting three line plots for weekly sales for each year
+plt.plot(weekly_sales_2010.index, weekly_sales_2010.values, label='2010')
+plt.plot(weekly_sales_2011.index, weekly_sales_2011.values, label='2011')
+plt.plot(weekly_sales_2012.index, weekly_sales_2012.values, label='2012')
+
+plt.grid()
+
+# Plot labels and legends
+plt.xticks(np.arange(1, 54, step=1))
+plt.title('Average Weekly Sales Per Year', fontsize=20)
+plt.xlabel('Week', fontsize=16)
+plt.ylabel('Sales', fontsize=16)
+plt.legend(loc='best', fontsize=16)
+plt.show()
+
+
+#### We can see from the combined line lot that on week 51 of 2010 we have the maximum sale
+
+Line plots between week and weekly sales is a good way to compare sales for each year.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+### 4) Histogram / Normal Distribution
+
+f, ax = plt.subplots(figsize=(8, 6))
+#Creating a distribution for weekly sales in the dataframe train_df
+sns.distplot(train_df['Weekly_Sales'],color='g')
+
+#Skewness is a measure of symmetry, or more precisely, the lack of symmetry. A distribution, or data set, is symmetric if it looks the same to the left and right of the center point.
+print("Skewness: ", train_df['Weekly_Sales'].skew()) #skewness
+#Kurtosis is a measure of whether the data are heavy-tailed or light-tailed relative to a normal distribution. That is, data sets with high kurtosis tend to have heavy tails, or outliers. Data sets with low kurtosis tend to have light tails, or lack of outliers
+print("Kurtosis: ", train_df['Weekly_Sales'].kurt()) #kurtosis
+
+The above code is to determine the skew and kurtosis of the normal distribution.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+### 5) Box Plot
+
+#concatinating the type and column from store_df together to find the relation between stores falling under each type and size.
+data = pd.concat([stores_df['Type'], stores_df['Size']], axis=1)
+f, ax = plt.subplots(figsize=(8, 6))
+#Plot a box plot to understand the relation between type and size of stores.
+fig = sns.boxplot(x='Type', y='Size', data=data)
+
+From the above box plots we can see that Type A plots are the largest, ie has the largest size
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+### 6) Bar Chart On Data Frame
+
+weekly_sales_store = train_df['Weekly_Sales'].groupby(train_df['Store']).mean()
+
+#### Grouping the train_df by store and computing the mean of weekly_sales for each store.
+
+visualizing the data
+
+weekly_sales_store.head()
+
+#### Converting the data to a pandas dataframe
+
+weekly_sales_store_df=pd.DataFrame(weekly_sales_store)
+
+#### Sorting the data frame with respect to weekly sales in Descending order and plotting a var graph on the data frame itself to get a idea about the data.
+
+weekly_sales_store_df.sort_values("Weekly_Sales",ascending=False).style.bar(align='left',width=98,color='#FFD200')
+
+### We can see that Store number 20 has the highest weekly sales (20508.301592)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+#### Sorting the data frame with respect to weekly sales in Ascending order and plotting a var graph on the data frame itself to get a idea about the data.
+
+weekly_sales_store_df.sort_values("Weekly_Sales").style.bar(align='left',width=98,color='#ff00bf')
+
+### We can see that Store number 5 has the least weekly sales (5053.415813)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+### 7) Bar graph fpr mean weekly sales for each store.
+
+## Plotting a bar graph with store number as x values and mean weekly sales for that store as the y values.
+
+import matplotlib.pyplot as plt
+
+# Assuming weekly_sales_store is a pandas Series or DataFrame with store numbers as index and mean weekly sales as values
+
+# Plotting the figure.
+plt.figure(figsize=(25, 12))
+
+# Creating a barplot with stores in x-axis and mean weekly sales for each store as y-values.
+plt.bar(weekly_sales_store.index, weekly_sales_store.values, color='green')
+
+# Plot a grid
+plt.grid()
+
+# Give title, x and y labels for the plot
+plt.title('Average Weekly Sales Per Store', fontsize=20)
+plt.xlabel('Store Number', fontsize=16)
+plt.ylabel('Sales Per Store', fontsize=16)
+
+plt.show()
+
+
+1)We can see that this plot is a great way to analyse how each store is performing sales wise.
+
+2)From the plot we can see that store number 20 has the highesst mean weekly sales, followed by store 4 and then store 14.
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+#### Grouping the train_df by Department and computing the mean of weekly_sales for each Department.
+
+### 8) Bar chart on Data Frame.
+
+weekly_sales_Dept = train_df['Weekly_Sales'].groupby(train_df['Dept']).mean()
+
+converting it to a pandas dataframe
+
+
+weekly_sales_Dept_df= pd.DataFrame(weekly_sales_Dept)
+
+weekly_sales_Dept_df
+
+#### Sorting the data frame with respect to weekly sales in Descending order and plotting a var graph on the data frame itself to get a idea about the data.
+
+weekly_sales_Dept_df.sort_values("Weekly_Sales",ascending=False).style.bar(align='left',width=98,color='#d65f5f')
+
+### We can see that Department number 92 has the largest weekly sales.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+####  Sorting the data frame with respect to weekly sales in Ascending order and plotting a var graph on the data frame itself to get a idea about the data.
+
+weekly_sales_Dept_df.sort_values("Weekly_Sales").style.bar(align='left',width=98,color='#bfff00')
+
+### We can see that department 47 has a cumulative negative value for weekly sales followed by department 43 which has a very low weekly sale of 1.193333
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+### 9)Bar graph fpr mean weekly sales for each Department.
+
+## Plotting a bar graph with Department number as x values and mean weekly sales for that store as the y values.
+
+import matplotlib.pyplot as plt
+
+# Assuming weekly_sales_Dept is a pandas Series or DataFrame with department names or numbers as index and mean weekly sales as values
+
+# Plotting the figure.
+plt.figure(figsize=(25, 12))
+
+# Creating a barplot with department in x-axis and mean weekly sales for each department as y-values.
+plt.bar(weekly_sales_Dept.index, weekly_sales_Dept.values)
+
+# Plot a grid
+plt.grid()
+
+# Give title, x and y labels for the plot
+plt.title('Average Weekly Sales Per Department', fontsize=20)
+plt.xlabel('Department', fontsize=16)
+plt.ylabel('Sales', fontsize=16)
+
+plt.show()
+
+
+We can see that weekly sales is highest for department 92.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+### 10) Series of line plots for mean sales with respect to Departments.
+
+#### Creating line plots of mean weekly sales for each department in the dataframe.
+
+#Creating a data frame grouped by grouping the train_df on department and date.
+grouped=train_df.groupby(['Dept','Date']).mean().reset_index()
+
+#Filtering out Department, Date, Weekly sales from the new data frame grouped.
+data=grouped[['Dept','Date','Weekly_Sales']]
+
+#Finding out unique values in the department column.
+dept=train_df['Dept'].unique()
+#Sort the unique values in the column
+dept.sort()
+#Divide the departments into 4 batches
+dept_1=dept[0:20]
+dept_2=dept[20:40]
+dept_3=dept[40:60]
+dept_4=dept[60:]
+
+#Create subplots with 2 rows and 2 columns and adjusting the spacing between the subplots.
+fig, ax = plt.subplots(2,2,figsize=(20,10))
+fig.subplots_adjust(wspace=0.5, hspace=0.5)
+fig.subplots_adjust(left=0.1, right=0.9, bottom=0.1, top=0.9)
+
+
+#For each batch containg departments and for each department in each batch plot the weekly sales in accordance with date.
+for i in dept_1 :
+    data_1=data[data['Dept']==i]
+    ax[0,0].plot(data_1['Date'], data_1['Weekly_Sales'],label='Dept_1_mean_sales')
+
+for i in dept_2 :
+    data_1=data[data['Dept']==i]
+    ax[0,1].plot(data_1['Date'], data_1['Weekly_Sales'],label='Dept_1_mean_sales')
+
+for i in dept_3 :
+    data_1=data[data['Dept']==i]
+    ax[1,0].plot(data_1['Date'], data_1['Weekly_Sales'],label='Dept_1_mean_sales')
+
+for i in dept_4 :
+    data_1=data[data['Dept']==i]
+    ax[1,1].plot(data_1['Date'], data_1['Weekly_Sales'],label='Dept_1_mean_sales')
+
+
+#Give each subplot a suitable title
+ax[0,0].set_title('Mean sales record by department (0-19)')
+ax[0,1].set_title('Mean sales record by department (20-39)')
+ax[1,0].set_title('Mean sales record by department (40-59)')
+ax[1,1].set_title('Mean sales record by department (60-)')
+
+#Give each Subplot y and x labels
+ax[0,0].set_ylabel('Mean sales With Respect To Specified Departments')
+ax[0,0].set_xlabel('Date')
+ax[0,1].set_ylabel('Mean sales With Respect To Specified Departments')
+ax[0,1].set_xlabel('Date')
+ax[1,0].set_ylabel('Mean sales With Respect To Specified Departments')
+ax[1,0].set_xlabel('Date')
+ax[1,1].set_ylabel('Mean sales With Respect To Specified Departments')
+ax[1,1].set_xlabel('Date')
+
+
+plt.show()
+
+1)The sales level is different by department
+
+
+2)There is some peaked points around January and May, thus indicating high sales during those times.
+
+We can see that departments and date are good features to predict the sales.
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+### 11) Histogram / Normal Distribution
+
+*   List item
+*   List item
+
+
+
+### Plotting the normal distribution where sales is greater than zero.
+
+#Data for sales over zero
+train_over_zero_sales=train_df[train_df['Weekly_Sales']>0]
+#Data for sales less than zero
+train_below_zero_sales=train_df[train_df['Weekly_Sales']<=0]
+#Natural log of data for sales over zero
+sales_over_zero_sales = np.log1p(train_over_zero_sales['Weekly_Sales'])
+#plotting a histogram and normal distribution for data with sales over zero.
+f, ax = plt.subplots(figsize=(8, 6))
+sns.distplot(sales_over_zero_sales)
+
+print("Skewness: ", sales_over_zero_sales.skew()) #skewness
+print("Kurtosis: ", sales_over_zero_sales.kurt()) #kurtosis
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+### 12) Heatmap
+
+### Plotting a heatmap to determine the correlation between columns in the data frame.
+
+sns.set(style = 'white')
+
+
+fig, ax = plt.subplots(figsize= (25, 15))
+sns.heatmap(train_df_1.corr(), cmap = 'icefire', vmax = 0.3, center = 0, square = True, linewidth= 0.5, cbar_kws = {'shrink': 0.5}, annot = True)
+
+We can see that there are various column that have very week correlation and thus its always better to drop these columns before modelling since that columns dosent contribute much to the process.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Also,some columns are strongly correlated . One of them must be dropped else they would carry similar information to the model.
+
+# --------------------------------------------------------------------------------------------------------
