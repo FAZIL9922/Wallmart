@@ -46,6 +46,7 @@ Sorting the data frame with respect to weekly sales in Descending order and plot
 We can see that Department number 92 has the largest weekly sales.
 Sorting the data frame with respect to weekly sales in Ascending order and plotting a var graph on the data frame itself to get a idea about the data.
 We can see that department 47 has a cumulative negative value for weekly sales followed by department 43 which has a very low weekly sale of 1.193333
+
 9)Bar graph fpr mean weekly sales for each Department.
 Plotting a bar graph with Department number as x values and mean weekly sales for that store as the y values.
 10) Series of line plots for mean sales with respect to Departments.
