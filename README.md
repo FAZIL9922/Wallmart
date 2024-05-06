@@ -24,7 +24,8 @@ Convering date to date time object.
 Creating a new df by merging (inner) the train_df and the new data frame dataset_m on store, date and IsHoliday columns and sorting the values by Store, department and date.
 VISUALIZATIONS
 Defining a function scatter to plot the scatter plot with the data of the column specified as the function parameter in x axis and weekly sales as the y values.
-NOTE: I have attached the googlecolab file named (walmart data analysis and visualization.ipynb) where u can download and open it on the google colab to access it.
+
+**NOTE**: I have attached the googlecolab file named (walmart data analysis and visualization.ipynb) where u can download and open it on the google colab to access it.
 Also i have attached the code i have used on this project in a python code file.
 1) scatter plot
 2) 3 line plots for weekly sales for eact year
