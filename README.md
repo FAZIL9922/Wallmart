@@ -42,10 +42,7 @@ The task is to analyze the sales of Walmart with the data given. (e.g., analyzin
 19)Creating a new df by merging (inner) the train_df and the new dataframe dataset_m on Store, date, and IsHoliday columns and sorting the values by Store, department, and date.
 
 ## VISUALIZATIONS
-Defining a function scatter to plot the scatter plot with the data of the column specified as the function parameter on the x-axis and weekly sales as the y values.
-
 NOTE: I have attached the Google Colab file named walmart_data_analysis_and_visualization.ipynb where you can download and open it on Google Colab to access it.
-
 Also, I have attached the code I have used on this project in a Python code file.
 
 1)Scatter plot
