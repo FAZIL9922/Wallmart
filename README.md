@@ -2,7 +2,7 @@
 Walmart Inc. is an American multinational retail corporation that operates a chain of hypermarkets, discount department stores, and grocery stores from the United States, headquartered in Bentonville, Arkansas.
 The task is to analyze the sales of Walmart with the data given. (e.g., analyzing weekly sales, which store or department sells the most, etc.)
 
-## DATA ANALYSIS AND VISUALIZATION
+## DATA ANALYSIS
 1)Importing all the required libraries and packages.
 
 2)Reading all the CSV files as dataframes using the pd.read_csv method.
