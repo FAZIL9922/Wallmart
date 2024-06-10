@@ -2,6 +2,8 @@
 Walmart Inc. is an American multinational retail corporation that operates a chain of hypermarkets, discount department stores, and grocery stores from the United States, headquartered in Bentonville, Arkansas.
 The task is to analyze the sales of Walmart with the data given. (e.g., analyzing weekly sales, which store or department sells the most, etc.)
 
+NOTE: I have attached the Google Colab file named walmart_data_analysis_and_visualization.ipynb where you can download and open it on Google Colab to access it.
+Also, I have attached the code I have used on this project in a Python code file. The data files in CSV format have been uploaded separately in the repository.
 ## DATA ANALYSIS
 1)Importing all the required libraries and packages.
 
@@ -42,9 +44,6 @@ The task is to analyze the sales of Walmart with the data given. (e.g., analyzin
 19)Creating a new df by merging (inner) the train_df and the new dataframe dataset_m on Store, date, and IsHoliday columns and sorting the values by Store, department, and date.
 
 ## VISUALIZATIONS
-NOTE: I have attached the Google Colab file named walmart_data_analysis_and_visualization.ipynb where you can download and open it on Google Colab to access it.
-Also, I have attached the code I have used on this project in a Python code file.
-
 1)Scatter plot
 
 2)Three line plots for weekly sales for each year.
