@@ -3,7 +3,9 @@ Walmart Inc. is an American multinational retail corporation that operates a cha
 The task is to analyze the sales of Walmart with the data given. (e.g., analyzing weekly sales, which store or department sells the most, etc.)
 
 NOTE: I have attached the Google Colab file named walmart_data_analysis_and_visualization.ipynb where you can download and open it on Google Colab to access it.
-Also, I have attached the code I have used on this project in a Python code file. The data files in CSV format have been uploaded separately in the repository.
+Also, I have attached the code I have used on this project in a Python code file. The data files in CSV format have been uploaded separately in the repository. 
+
+*While running the code in colab, make sure to download and import the csv files before running the codes.
 ## DATA ANALYSIS
 1)Importing all the required libraries and packages.
 
@@ -46,56 +48,49 @@ Also, I have attached the code I have used on this project in a Python code file
 ## VISUALIZATIONS
 1)Scatter plot
 
+![image](https://github.com/FAZIL9922/Wallmart/assets/138848536/9fbd3f8c-049b-4e65-81ef-9a2545a77e28)
+
 2)Three line plots for weekly sales for each year.
+
+![image](https://github.com/FAZIL9922/Wallmart/assets/138848536/30f17d00-09f3-4e55-9da5-1a084253cde7)
+
+![image](https://github.com/FAZIL9922/Wallmart/assets/138848536/07e0d10b-1acb-41dd-86f6-3d1c8d8a138d)
+
+![image](https://github.com/FAZIL9922/Wallmart/assets/138848536/f9b75c1a-face-4e30-adc9-9b93792997de)
 
 3)Combined line plots for each year (2010, 2011, 2012)
 
-4)Plotting the weekly sales for the years 2010, 2011, 2012 on a single plot to compare the sales values with respect to week on each of these specified years for comparing the weekly sales in each year.
+![image](https://github.com/FAZIL9922/Wallmart/assets/138848536/5c873cea-6fdf-4be6-9d48-cb632e86423e)
 
-5)We can see from the combined line plot that in week 51 of 2010, we have the maximum sale.
+We can see from the combined line plot that in week 51 of 2010, we have the maximum sale.
 
-6)Histogram / Normal Distribution
+4)Histogram / Normal Distribution
 
-7)Box Plot
+![image](https://github.com/FAZIL9922/Wallmart/assets/138848536/fc4fefa9-6042-462f-8ef7-63c4d9a4a10c)
 
-8)Bar Chart On Data Frame
+5)Box Plot
 
-9)Grouping the train_df by store and computing the mean of weekly sales for each store.
+![image](https://github.com/FAZIL9922/Wallmart/assets/138848536/dadbea9e-87b9-4a3d-918a-668615b6c402)
 
-10)Converting the data to a pandas dataframe.
+6)Bar graph for mean weekly sales for each store.
 
-11)Sorting the dataframe with respect to weekly sales in descending order and plotting a bar graph on the dataframe itself to get an idea about the data.
+![image](https://github.com/FAZIL9922/Wallmart/assets/138848536/64a8dccc-fa8c-4f19-bd72-416f5f024038)
 
-12)We can see that Store number 20 has the highest weekly sales (20508.301592).
+7)Bar graph of mean weekly sales for each department.
 
-13)Sorting the dataframe with respect to weekly sales in ascending order and plotting a bar graph on the dataframe itself to get an idea about the data.
+![image](https://github.com/FAZIL9922/Wallmart/assets/138848536/cd3c0e90-bb1c-40a8-9292-ab9d0a188f7e)
 
-14)We can see that Store number 5 has the least weekly sales (5053.415813).
 
-15)Bar graph for mean weekly sales for each store.
+8)Series of line plots for mean sales with respect to departments.
 
-16)Plotting a bar graph with store number as x values and mean weekly sales for that store as the y values.
+![image](https://github.com/FAZIL9922/Wallmart/assets/138848536/a0068386-eafc-4fd4-adef-e7fbb200c303)
 
-17)Grouping the train_df by department and computing the mean of weekly sales for each department.
 
-18)Bar chart on Data Frame.
+9)Histogram / Normal Distribution - Plotting the normal distribution where sales are greater than zero.
 
-19)Sorting the dataframe with respect to weekly sales in descending order and plotting a bar graph on the dataframe itself to get an idea about the data.
+![image](https://github.com/FAZIL9922/Wallmart/assets/138848536/13677949-0cda-4dfd-8d0b-dc17b76f7761)
 
-20)We can see that Department number 92 has the largest weekly sales.
-Sorting the dataframe with respect to weekly sales in ascending order and 
-plotting a bar graph on the dataframe itself to get an idea about the data.
 
-21)We can see that department 47 has a cumulative negative value for weekly sales followed by department 43 which has a very low weekly sale of 1.193333.
+10)Heatmap - Plotting a heatmap to determine the correlation between columns in the dataframe.
 
-22)Bar graph for mean weekly sales for each department.
-
-23)Plotting a bar graph with department number as x values and mean weekly sales for that department as the y values.
-
-24)Series of line plots for mean sales with respect to departments.
-
-25)Creating line plots of mean weekly sales for each department in the dataframe.
-
-26)Histogram / Normal Distribution - Plotting the normal distribution where sales are greater than zero.
-
-27)Heatmap - Plotting a heatmap to determine the correlation between columns in the dataframe.
+![image](https://github.com/FAZIL9922/Wallmart/assets/138848536/23c8cb50-2188-4392-84c5-8e3fcc9143ef)
